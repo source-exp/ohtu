@@ -47,6 +47,15 @@ def print_players(players, season, nationality):
     console.print(table)
 
 
+def get_players_for_selection(stats, selection):
+    """Hae pelaajat kansalaisuuden tai joukkueen perusteella."""
+    if selection in NATIONALITIES:
+        return stats.top_scorers_by_nationality(selection), f"nationality {selection}"
+
+    team = Prompt.ask("Team code").upper()
+    return stats.top_scorers_by_team(team), f"team {team}"
+
+
 def main():
     """Käynnistä komentorivikäyttöliittymä."""
     season = Prompt.ask("Season", choices=SEASONS, default="2024-25")
@@ -54,16 +63,17 @@ def main():
     stats = PlayerStats(PlayerReader(url))
 
     while True:
-        nationality = Prompt.ask(
-            "Nationality",
-            choices=NATIONALITIES + ["QUIT"],
+        selection = Prompt.ask(
+            "Nationality or team",
+            choices=NATIONALITIES + ["team code", "QUIT"],
             default="FIN",
-        )
-        if nationality == "QUIT":
+            show_choices=True,
+        ).upper()
+        if selection == "QUIT":
             break
 
-        players = stats.top_scorers_by_nationality(nationality)
-        print_players(players, season, nationality)
+        players, label = get_players_for_selection(stats, selection)
+        print_players(players, season, label)
 
 
 if __name__ == "__main__":
