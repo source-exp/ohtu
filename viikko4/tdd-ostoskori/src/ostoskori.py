@@ -13,9 +13,12 @@ class Ostoskori:
     def hinta(self):
         return self._hinta
 
+    def _paivita_korin_tila(self, tuote: Tuote, muutos: int):
+        self._tavaroita += muutos
+        self._hinta += muutos * tuote.hinta()
+
     def lisaa_tuote(self, lisattava: Tuote):
-        self._tavaroita += 1
-        self._hinta += lisattava.hinta()
+        self._paivita_korin_tila(lisattava, 1)
         for ostos in self._ostokset:
             if ostos.tuote == lisattava:
                 ostos.muuta_lukumaaraa(1)
@@ -26,8 +29,7 @@ class Ostoskori:
         for ostos in self._ostokset:
             if ostos.tuote == poistettava:
                 ostos.muuta_lukumaaraa(-1)
-                self._tavaroita -= 1
-                self._hinta -= poistettava.hinta()
+                self._paivita_korin_tila(poistettava, -1)
                 if ostos.lukumaara() == 0:
                     self._ostokset.remove(ostos)
                 return
