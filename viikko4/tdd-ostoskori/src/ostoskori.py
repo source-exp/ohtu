@@ -1,6 +1,7 @@
 from tuote import Tuote
 from ostos import Ostos
 
+
 class Ostoskori:
     def __init__(self):
         self._tavaroita = 0
