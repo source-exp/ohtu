@@ -1,0 +1,13 @@
+[project]
+name = "warehouse-web-ui"
+version = "0.1.0"
+description = "A small web interface for warehouses"
+requires-python = ">=3.13"
+dependencies = [
+    "flask>=3.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.0",
+]
