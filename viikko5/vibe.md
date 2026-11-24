@@ -30,3 +30,10 @@ ratkaisuun Copilot olisi päätynyt tai mitä uutta sen koodia lukemalla olisi
 opittu. Tehtävä osoitti kuitenkin, että tarkka issue-kuvaus auttaa rajaamaan
 ominaisuudet ja testattavat hyväksymiskriteerit, riippumatta siitä toteuttaako
 ratkaisun pilviagentti vai ihminen.
+
+Myöhemmin käynnistin GitHub CLI:llä erillisen Copilot-agenttitehtävän, joka
+vertasi valmista sovellusta issue #2:n hyväksymiskriteereihin. Agentti lisäsi
+puuttuneet reittitestit, mutta ei muuttanut tuotantokoodia. Ajoin testit:
+kaikki kahdeksan testiä menivät läpi. Muutokset ovat PR:ssä #4, joka on
+mergeätty `main`-haaraan. Tämä täydensi testikattavuutta, mutta ei ollut
+alkuperäisen PR:n katselmointiin liittynyt muutospyyntökierros.
